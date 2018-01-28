@@ -43,6 +43,6 @@ jspm_packages
 # Transpiled files
 dist
 
-
-### CUSTOM IGNORES ###
-/test/github-test-credentials.txt
+# Firebase Configs
+serviceAccountKey.json
+firebaseConfig.json
