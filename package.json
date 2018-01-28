@@ -1,0 +1,51 @@
+{
+  "name": "skadi",
+  "version": "0.0.0",
+  "description": "Utility to send heartbeat and data information from express.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "npm run build && node dist/index.js",
+    "test": "npm run build && nyc mocha --compilers js:babel-register --require babel-polyfill",
+    "lint": "eslint src/. --ext .js",
+    "build": "babel src --out-dir dist",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "prepublishOnly": "npm run build"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hammer-io/skadi.git"
+  },
+  "authors": [
+    "Jack Meyer <jackcmeyer@gmail.com> (www.jackcmeyer.com)"
+  ],
+  "keywords": [],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hammer-io/skadi/issues"
+  },
+  "homepage": "https://github.com/hammer-io/skadi#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "fs-extra": "^5.0.0",
+    "winston": "^3.0.0-rc1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-async-to-generator": "6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "codecov": "^3.0.0",
+    "eslint": "^4.8.0",
+    "eslint-config-airbnb-base": "^12.0.1",
+    "eslint-plugin-import": "^2.7.0",
+    "mocha": "^5.0.0",
+    "nyc": "^11.2.1",
+    "pre-commit": "^1.2.2",
+    "sinon": "^4.1.3"
+  },
+  "engines": {
+    "node": ">= 6"
+  }
+}
