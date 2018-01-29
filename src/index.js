@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import * as firebase from 'firebase-admin';
 import serviceAccount from '../serviceAccountKey.json';
 import firebaseConfig from '../firebaseConfig.json';
