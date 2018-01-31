@@ -1,13 +1,12 @@
-# skadi-endor
+# koma
 Service to accept heartbeat and data information and store it
 
-[![Build Status](https://travis-ci.org/hammer-io/skadi-endor.svg?branch=master)](https://travis-ci.org/hammer-io/skadi-endor)
-[![codecov](https://codecov.io/gh/hammer-io/skadi-endor/branch/master/graph/badge.svg)](https://codecov.io/gh/hammer-io/skadi-endor)
+[![Build Status](https://travis-ci.org/hammer-io/koma.svg?branch=master)](https://travis-ci.org/hammer-io/koma)
 
 ## Getting Started For Development
 1. Fork the repository
-2. Run `git clone https://github.com/<username>/skadi-endor` to clone the repository
-3. Run `cd skadi-endor`, then `npm install`
+2. Run `git clone https://github.com/<username>/koma` to clone the repository
+3. Run `cd koma`, then `npm install`
 4. Setup your Firebase database
 5. Setup configurations for firebase database
 * Create a `firebaseConfig.json` with the following: 

@@ -1,5 +1,5 @@
 {
-  "name": "skadi-endor",
+  "name": "koma",
   "version": "0.0.0",
   "description": "Service to accept heartbeat and data information and store it.",
   "main": "src/index.js",
@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/hammer-io/skadi-endor.git"
+    "url": "https://github.com/hammer-io/koma.git"
   },
   "authors": [
     "Jack Meyer <jackcmeyer@gmail.com> (www.jackcmeyer.com)"
@@ -24,9 +24,9 @@
   "keywords": [],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hammer-io/skadi-endor/issues"
+    "url": "https://github.com/hammer-io/koma/issues"
   },
-  "homepage": "https://github.com/hammer-io/skadi-endor#readme",
+  "homepage": "https://github.com/hammer-io/koma#readme",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "express": "^4.16.2",
