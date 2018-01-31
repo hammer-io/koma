@@ -1,21 +1,20 @@
-/* eslint-disable import/no-unresolved */
-import * as firebase from 'firebase-admin';
-import serviceAccount from '../serviceAccountKey.json';
-import firebaseConfig from '../firebaseConfig.json';
+import express from 'express';
+import * as heartbeats from './routes/heatbeat.routes';
+import * as index from './routes/index.routes';
 
-console.log('Hello, World');
+const app = express();
 
-firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccount),
-  databaseURL: firebaseConfig.databaseUrl
+app.use('/', express.static('docs'));
+app.use('/api', [index.router]);
+app.use('/api/v1', [heartbeats.router]);
+
+app.use((req, res) => {
+  res.status(404).send({
+    status: 404,
+    message: 'Not Found',
+    documentation_url: `http://${req.get('host')}`
+  });
 });
 
-const ref = firebase.database().ref('test');
+app.listen(4000, () => console.log('skadi-endor listening on port 4000'));
 
-const heartBeatRef = ref.child('heartbeats');
-heartBeatRef.set({
-  testApplication: {
-    status: 'Green',
-    timestamp: 'hello, world'
-  }
-});
