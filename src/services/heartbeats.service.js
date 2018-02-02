@@ -1,3 +1,5 @@
+import FirebaseService from './firebase.service';
+
 /**
  * @author Jack Meyer
  *
@@ -10,7 +12,8 @@ export default class HeartbeatService {
    * @param id the of the project for the heartbeat
    */
   static async postHeartBeatToFirebase(id) {
-    console.log(`Posting Heartbeat to Firebase for project with id: ${id}....`);
+    const firebase = new FirebaseService();
+    await firebase.postHeartbeatToFirebase(id);
   }
 
   /**
@@ -19,6 +22,8 @@ export default class HeartbeatService {
    * @param id the of the project to fetch heartbeats for
    */
   static async getHeartbeatsFromFirebase(id) {
-    console.log(`Get Heartbeast from Firebase for project with id: ${id}....`);
+    const firebase = new FirebaseService();
+    const heartbeats = await firebase.getHeartbeatsFromFirebase(id);
+    return heartbeats;
   }
 }
