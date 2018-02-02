@@ -18,3 +18,9 @@ Service to accept heartbeat and data information and store it
 underneath `settings -> Firebase Admin SDK -> Generate New Private Key`
 
 
+## Generating Documenation
+We use [apidoc.js](http://apidocjs.com/) for API Documenation. 
+
+To generate documentation, run the command `apidoc -i src/ -o docs/`. This command will 
+generate all documentation for files underneath the `src/` directory and generate the documentation
+ in the `docs/` folder.  The `npm build` command will also generate the documentation. 
