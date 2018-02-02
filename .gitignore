@@ -43,6 +43,5 @@ jspm_packages
 # Transpiled files
 dist
 
-# Firebase Configs
-serviceAccountKey.json
-firebaseConfig.json
+# Configs
+config/default.json
