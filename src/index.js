@@ -21,5 +21,5 @@ app.use((req, res) => {
   });
 });
 
-app.listen(4000, () => console.log('koma listening on port 4000'));
+app.listen(3001, () => console.log('koma listening on port 3001'));
 
