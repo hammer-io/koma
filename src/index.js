@@ -3,6 +3,9 @@ import firebase from 'firebase-admin';
 import config from 'config';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import helmet from 'helmet';
+
 import * as heartbeats from './routes/heatbeat.routes';
 import * as index from './routes/index.routes';
 import FirebaseService from './services/firebase.service';
@@ -24,9 +27,11 @@ heartbeats.setDependencies(heartbeatSerivce);
 // end dependency injections
 
 const app = express();
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(logger('dev'));
 
 app.use('/', express.static('docs'));
 app.use('/api', [index.router]);
