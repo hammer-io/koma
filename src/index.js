@@ -10,6 +10,7 @@ import * as heartbeats from './routes/heatbeat.routes';
 import * as index from './routes/index.routes';
 import FirebaseService from './services/firebase.service';
 import HeartbeatService from './services/heartbeats.service';
+import { getActiveLogger } from './utils/winston';
 
 // setup firebase
 const serviceAccount = config.get('firebase.serviceAccount');
@@ -21,9 +22,9 @@ firebase.initializeApp({
 
 
 // dependency injections
-const firebaseService = new FirebaseService(firebase);
-const heartbeatSerivce = new HeartbeatService(firebaseService);
-heartbeats.setDependencies(heartbeatSerivce);
+const firebaseService = new FirebaseService(firebase, getActiveLogger());
+const heartbeatService = new HeartbeatService(firebaseService, getActiveLogger());
+heartbeats.setDependencies(heartbeatService);
 // end dependency injections
 
 const app = express();

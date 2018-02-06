@@ -8,7 +8,7 @@ let heartbeatService = {};
  */
 export async function postNewHeartbeat(req, res, next) {
   try {
-    await heartbeatService.postHeartBeatToFirebase(req.body.id);
+    await heartbeatService.postHeartbeatToFirebase(req.body.id);
     res.send('success');
   } catch (error) {
     next(error);
