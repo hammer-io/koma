@@ -41,3 +41,7 @@ router.post('/heartbeats', heartbeatsController.postNewHeartbeat);
  *
  */
 router.get('/heartbeats/:id', heartbeatsController.getHeartbeats);
+
+export function setDependencies(heartbeatService) {
+  heartbeatsController.setDependencies(heartbeatService);
+}

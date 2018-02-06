@@ -1,21 +1,35 @@
-import HeartbeatService from '../services/heartbeats.service';
+let heartbeatService = {};
 
 /**
  * Controller for POST /heartbeats
  * @param req the request object
  * @param res the response object
+ * @param next the next middleware
  */
-export async function postNewHeartbeat(req, res) {
-  await HeartbeatService.postHeartBeatToFirebase(req.body.id);
-  res.send({ endpoint: 'POST /heartbeats' });
+export async function postNewHeartbeat(req, res, next) {
+  try {
+    await heartbeatService.postHeartBeatToFirebase(req.body.id);
+    res.send('success');
+  } catch (error) {
+    next(error);
+  }
 }
 
 /**
  * Controller for GET /heartbeats/:id
  * @param req the request object
  * @param res the response object
+ * @param next the next middleware
  */
-export async function getHeartbeats(req, res) {
-  const heartbeats = await HeartbeatService.getHeartbeatsFromFirebase(req.params.id);
-  res.send({ heartbeats });
+export async function getHeartbeats(req, res, next) {
+  try {
+    const heartbeats = await heartbeatService.getHeartbeatsFromFirebase(req.params.id);
+    res.send({ heartbeats });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export function setDependencies(newHeartBeatService) {
+  heartbeatService = newHeartBeatService;
 }
