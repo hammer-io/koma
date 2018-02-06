@@ -12,6 +12,7 @@ import FirebaseService from './services/firebase.service';
 import HeartbeatService from './services/heartbeats.service';
 import { getActiveLogger } from './utils/winston';
 
+
 // setup firebase
 const serviceAccount = config.get('firebase.serviceAccount');
 const databaseURL = config.get('firebase.databaseUrl');
