@@ -1,4 +1,7 @@
+import { validationResult } from 'express-validator/check';
+
 let heartbeatService = {};
+
 
 /**
  * Controller for POST /heartbeats
@@ -7,6 +10,11 @@ let heartbeatService = {};
  * @param next the next middleware
  */
 export async function postNewHeartbeat(req, res, next) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.mapped() });
+  }
+
   try {
     await heartbeatService.postHeartbeatToFirebase(req.body.id);
     res.send('success');

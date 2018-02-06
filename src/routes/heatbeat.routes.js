@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import express from 'express';
 import * as heartbeatsController from '../controllers/heatbeat.controller';
+import * as heartbeatsMiddleware from '../middlewares/heatbeats.middleware';
 
 export const router = express.Router();
 
@@ -20,7 +21,7 @@ export const router = express.Router();
  * }
  *
  */
-router.post('/heartbeats', heartbeatsController.postNewHeartbeat);
+router.post('/heartbeats', heartbeatsMiddleware.checkPostNewHeartbeats(), heartbeatsController.postNewHeartbeat);
 
 
 /**
