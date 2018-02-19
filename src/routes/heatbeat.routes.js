@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import express from 'express';
 import * as heartbeatsController from '../controllers/heatbeat.controller';
 import * as heartbeatsMiddleware from '../middlewares/heatbeats.middleware';
