@@ -3,5 +3,5 @@
   "version": "1.0.0",
   "description": "Service to accept heartbeat and data information and store it.",
   "title": "koma",
-  "url": "localhost:4000/api/v1"
+  "url": "localhost:3001/api/v1"
 }

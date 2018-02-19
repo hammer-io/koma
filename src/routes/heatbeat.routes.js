@@ -25,7 +25,7 @@ router.post('/heartbeats', heartbeatsMiddleware.checkPostNewHeartbeats(), heartb
 
 
 /**
- * @api {get} /heartbeats Get Heartbeats
+ * @api {get} /heartbeats/:id Get Heartbeats
  * @apiVersion 1.0.0
  * @apiName Get Heartbeat
  * @apiGroup Heartbeats
