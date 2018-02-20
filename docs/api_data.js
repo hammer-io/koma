@@ -72,7 +72,7 @@ define({ "api": [
     "groupTitle": "Heartbeats"
   },
   {
-    "type": "get",
+    "type": "delete",
     "url": "/tokens/:tokenId",
     "title": "Delete Token",
     "version": "1.0.0",

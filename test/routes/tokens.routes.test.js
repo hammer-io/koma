@@ -6,11 +6,51 @@ import server from '../globalSetupTeardown.test';
 chai.use(chaiHttp);
 const should = chai.should();
 const expect = chai.expect;
+const endpoint = '/tokens';
 
 describe('Testing Tokens Routes', () => {
-  describe('POST /tokens', () => {
-    const endpoint = '/tokens';
-    it('should return a new token for the project if properly authenticated', (done) => {
+  describe(`all ${endpoint} requests`, () => {
+    it('should have at least 1000 millisecond delay in response', (done) => {
+      const start = Date.now();
+      chai.request(server)
+        .post(`${apiUtil.API}${endpoint}`)
+        .send({ "projectId": "123abc" })
+        .end((err, res) => {
+          const duration = Date.now() - start;
+          expect(duration).to.be.greaterThan(1000);
+          res.should.have.status(401);
+          done();
+        });
+    });
+    it('should return stats 401 Unauthorized if authorization is missing', (done) => {
+      const start = Date.now();
+      chai.request(server)
+        .get(`${apiUtil.API}${endpoint}`)
+        .query({ "projectId": "123abc" })
+        .end((err, res) => {
+          const duration = Date.now() - start;
+          expect(duration).to.be.greaterThan(1000);
+          res.should.have.status(401);
+          done();
+        });
+    });
+    it('should return stats 401 Unauthorized if authorization is invalid', (done) => {
+      const start = Date.now();
+      chai.request(server)
+        .delete(`${apiUtil.API}${endpoint}`)
+        .set('Authorization', apiUtil.bearerAuthorization('itsatrickgetanaxe'))
+        .send({ "projectId": "123abc" })
+        .end((err, res) => {
+          const duration = Date.now() - start;
+          expect(duration).to.be.greaterThan(1000);
+          res.should.have.status(401);
+          done();
+        });
+    });
+  });
+
+  describe(`POST ${endpoint}`, () => {
+    it('should return a new token for the project', (done) => {
       const req = { "projectId": "123abc" };
       chai.request(server)
         .post(`${apiUtil.API}${endpoint}`)
@@ -27,34 +67,11 @@ describe('Testing Tokens Routes', () => {
           done();
         });
     });
-
-    it('should return stats 401 Unauthorized if authorization is missing', (done) => {
-      const req = {};
-      chai.request(server)
-        .post(`${apiUtil.API}${endpoint}`)
-        .send(req)
-        .end((err, res) => {
-          res.should.have.status(401);
-          done();
-        });
-    });
-
-    it('should return stats 401 Unauthorized if authorization is invalid', (done) => {
-      const req = {};
-      chai.request(server)
-        .post(`${apiUtil.API}${endpoint}`)
-        .set('Authorization', apiUtil.bearerAuthorization('lijawelfijasdf'))
-        .send(req)
-        .end((err, res) => {
-          res.should.have.status(401);
-          done();
-        });
-    });
   });
 
-  describe('GET /tokens', () => {
+  describe(`GET ${endpoint}`, () => {
   });
 
-  describe('DELETE /tokens/:tokenId', () => {
+  describe(`DELETE ${endpoint}/:tokenId`, () => {
   });
 });

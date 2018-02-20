@@ -1,6 +1,4 @@
 import express from 'express';
-import firebase from 'firebase-admin';
-import config from 'config';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
@@ -10,6 +8,7 @@ import passport from 'passport';
 import * as tokens from './routes/tokens.routes';
 import * as heartbeats from './routes/heatbeat.routes';
 import * as index from './routes/index.routes';
+import * as firebase from './utils/firebase';
 import FirebaseService from './services/firebase.service';
 import HeartbeatService from './services/heartbeats.service';
 import TokenService from './services/token.service';
@@ -18,16 +17,10 @@ import './utils/passport.initialization';
 
 
 // setup firebase
-const serviceAccount = config.get('firebase.serviceAccount');
-const databaseURL = config.get('firebase.databaseUrl');
-firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccount),
-  databaseURL
-});
-
+firebase.init();
 
 // dependency injections
-const firebaseService = new FirebaseService(firebase, getActiveLogger());
+const firebaseService = new FirebaseService(firebase.instance, getActiveLogger());
 const heartbeatService = new HeartbeatService(firebaseService, getActiveLogger());
 heartbeats.setDependencies(heartbeatService);
 const tokenService = new TokenService(getActiveLogger());
@@ -60,6 +53,7 @@ app.use((req, res) => {
 if (app.get('env') === 'development') {
 // eslint-disable-next-line no-unused-vars
   app.use((err, req, res, next) => {
+    console.error(err);
     res.status(err.status || 500);
     res.json({
       message: err.message,

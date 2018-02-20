@@ -4,6 +4,12 @@ import * as controller from '../controllers/tokens.controller';
 
 export const router = express.Router();
 
+// Add short delay to prevent brute-force attacks
+router.use((req, res, next) => {
+  const delayMillis = 1000;
+  setTimeout(next, delayMillis);
+});
+
 // Every request to the API must be authenticated via the bearer API token
 router.use(passport.authenticate('bearer', { session: false }));
 
@@ -34,7 +40,7 @@ router.post('/tokens', controller.generateNewToken);
 router.get('/tokens', controller.getTokens);
 
 /**
- * @api {get} /tokens/:tokenId Delete Token
+ * @api {delete} /tokens/:tokenId Delete Token
  * @apiVersion 1.0.0
  * @apiName Delete Token
  * @apiGroup Tokens

@@ -1,5 +1,9 @@
-import server from '../src/index';
+import MockFirebase from './test-utils/mockFirebase'
 import { getActiveLogger } from '../src/utils/winston';
+import * as firebase from '../src/utils/firebase';
+
+firebase.set(new MockFirebase(), {});
+const server = require('../src/index');
 
 before(async () => {
   console.log('Beginning Koma Test Suite');
