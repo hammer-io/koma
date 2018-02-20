@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/hammer-io/koma#readme",
   "dependencies": {
+    "@types/chai": "^4.1.2",
     "babel-polyfill": "^6.26.0",
     "body-parser": "1.18.2",
     "config": "^1.29.2",
@@ -48,6 +49,8 @@
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-async-to-generator": "6.24.1",
     "babel-preset-env": "^1.6.0",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
     "codecov": "^3.0.0",
     "eslint": "^4.8.0",
     "eslint-config-airbnb-base": "^12.0.1",

@@ -79,5 +79,4 @@ app.use((err, req, res) => {
 });
 
 
-app.listen(3001, () => console.log('koma listening on port 3001'));
-
+module.exports = app.listen(3001, () => console.log('koma listening on port 3001'));

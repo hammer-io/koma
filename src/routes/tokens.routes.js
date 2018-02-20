@@ -14,6 +14,8 @@ router.use(passport.authenticate('bearer', { session: false }));
  * @apiGroup Tokens
  *
  * @apiPermission Endor only (Authorization: "Bearer <token>")
+ *
+ * @apiParam {String} projectId The id of the project to create the token for
  */
 router.post('/tokens', controller.generateNewToken);
 

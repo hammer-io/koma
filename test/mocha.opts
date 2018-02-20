@@ -1,2 +1,4 @@
 --compilers js:babel-register
 --require babel-polyfill
+--require test/mocha.env.js
+--recursive

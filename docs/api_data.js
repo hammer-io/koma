@@ -145,6 +145,19 @@ define({ "api": [
         "name": "Endor only (Authorization: \"Bearer <token>\")"
       }
     ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "projectId",
+            "description": "<p>The id of the project to create the token for</p>"
+          }
+        ]
+      }
+    },
     "filename": "src/routes/tokens.routes.js",
     "groupTitle": "Tokens"
   }
