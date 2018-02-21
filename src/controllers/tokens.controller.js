@@ -23,22 +23,17 @@ export async function generateNewToken(req, res, next) {
   }
 }
 
-export async function getTokens(req, res, next) {
-  try {
-    // TODO: Get tokens
-    // TODO: Return tokens
-    res.send('success');
-  } catch (error) {
-    next(error);
-  }
-}
-
+/**
+ * Controller for GET /tokens/:id route
+ * @param req the request
+ * @param res the response
+ * @param next the next middleware
+ * @returns {Promise<void>}
+ */
 export async function getToken(req, res, next) {
-  // TODO: Validation
   try {
-    // TODO: Get tokens
-    // TODO: Return tokens
-    res.send('success');
+    const token = await tokenService.getToken(req.params.id);
+    res.send({ token });
   } catch (error) {
     next(error);
   }

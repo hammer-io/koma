@@ -1,4 +1,5 @@
 import TokenAlreadyExistsError from '../errors/TokenAlreadyExistsError';
+import TokenNotFound from '../errors/TokenNotFound';
 
 export default class TokenService {
   constructor(tokenRepository, logger) {
@@ -27,5 +28,28 @@ export default class TokenService {
     const tokenCreated = this.tokenRepository.create(token);
     this.log.info('Created new token!');
     return tokenCreated;
+  }
+
+  /**
+   * Gets a token by project id or token id
+   * @param id the id to get a token by
+   * @returns {Promise<token>} the token
+   */
+  async getToken(id) {
+    // find a token by id or project id
+    const token = await this.tokenRepository.find({
+      where: {
+        $or: {
+          projectId: id,
+          id
+        }
+      }
+    });
+
+    if (!token) {
+      throw new TokenNotFound(`Token with id ${id} not found`);
+    }
+
+    return token;
   }
 }

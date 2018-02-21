@@ -15,7 +15,7 @@ router.use((req, res, next) => {
 router.use(passport.authenticate('bearer', { session: false }));
 
 /**
- * @api {post} /tokens Post New API Token
+ * @api {post} /tokens Create API Token
  * @apiVersion 1.0.0
  * @apiName Post Token
  * @apiGroup Tokens
@@ -43,16 +43,29 @@ router.post('/tokens', middleware.checkCreateNewToken(), controller.generateNewT
 /**
  * @api {get} /tokens Get Tokens
  * @apiVersion 1.0.0
- * @apiName Get Tokens
+ * @apiName Get Token
  * @apiGroup Tokens
  *
  * @apiPermission Endor only (Authorization: "Bearer <token>")
  *
- * @apiParam {String} projectId The id of the project to filter tokens by
- * @apiParam [String] tokenId The id of the token being requested (not the token string itself)
-
+ * @apiParam {String} the project id or token id (note API token, but they token id itself) to
+ * to get
+ * 
+ * @apiSuccess {Object} token an object with the token information such as id, token, projectId,
+ * and created/updated dates
+ *
+ * @apiSuccessExample {json} Success Response
+ * {
+    "token": {
+        "id": "8b004799-23ff-4f23-9567-c64112caf9e9",
+        "token": "57045c56-1bd4-435b-9a9a-e03a906fa723",
+        "projectId": "a3",
+        "updatedAt": "2018-02-21T00:31:12.293Z",
+        "createdAt": "2018-02-21T00:31:12.293Z"
+    }
+  }
  */
-router.get('/tokens ', controller.getTokens);
+router.get('/tokens/:id', controller.getToken);
 
 /**
  * @api {delete} /tokens/:tokenId Delete Token
