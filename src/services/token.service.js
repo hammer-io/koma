@@ -52,4 +52,13 @@ export default class TokenService {
 
     return token;
   }
+
+  /**
+   * Deletes a token by token id or project id
+   * @param id the id of the token to delete
+   */
+  async deleteToken(id) {
+    const token = await this.getToken(id);
+    token.destroy();
+  }
 }

@@ -41,16 +41,16 @@ router.use(passport.authenticate('bearer', { session: false }));
 router.post('/tokens', middleware.checkCreateNewToken(), controller.generateNewToken);
 
 /**
- * @api {get} /tokens Get Tokens
+ * @api {get} /tokens Get Token
  * @apiVersion 1.0.0
  * @apiName Get Token
  * @apiGroup Tokens
  *
  * @apiPermission Endor only (Authorization: "Bearer <token>")
  *
- * @apiParam {String} the project id or token id (note API token, but they token id itself) to
+ * @apiParam {String} id the project id or token id (note API token, but they token id itself) to
  * to get
- * 
+ *
  * @apiSuccess {Object} token an object with the token information such as id, token, projectId,
  * and created/updated dates
  *
@@ -75,9 +75,10 @@ router.get('/tokens/:id', controller.getToken);
  *
  * @apiPermission Endor only (Authorization: "Bearer <token>")
  *
- * @apiParam {String} tokenId The id of the token being deleted (not the token string itself)
+ * @apiParam {String} the project id or token id (note API token, but they token id itself) to
+ * to delete
  */
-router.delete('/tokens/:tokenId', controller.deleteToken);
+router.delete('/tokens/:id', controller.deleteToken);
 
 export function setDependencies(tokensService) {
   controller.setDependencies(tokensService);

@@ -28,7 +28,6 @@ export async function generateNewToken(req, res, next) {
  * @param req the request
  * @param res the response
  * @param next the next middleware
- * @returns {Promise<void>}
  */
 export async function getToken(req, res, next) {
   try {
@@ -39,12 +38,16 @@ export async function getToken(req, res, next) {
   }
 }
 
+/**
+ * Controller for DELETE /tokens/:id route
+ * @param req the request
+ * @param res the response
+ * @param next the next middleware
+ */
 export async function deleteToken(req, res, next) {
-  // TODO: Validation
   try {
-    // TODO: Get token
-    // TODO: Delete token
-    res.send('success');
+    await tokenService.deleteToken(req.params.id);
+    res.status(204).send();
   } catch (error) {
     next(error);
   }
