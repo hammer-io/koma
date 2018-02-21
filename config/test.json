@@ -17,5 +17,20 @@
   },
   "auth": {
     "secret": "supersecret"
+  },
+  "database": {
+    "database": "hammer_koma",
+    "username": "root",
+    "password": "root",
+    "options": {
+      "host": "localhost",
+      "dialect": "mysql",
+      "pool": {
+        "max": 5,
+        "min": 0,
+        "acquire": 30000,
+        "idle": 10000
+      }
+    }
   }
 }

@@ -6,6 +6,9 @@
   "scripts": {
     "start": "npm run build && node dist/index.js",
     "test": "npm run build && nyc mocha --compilers js:babel-register --require babel-polyfill",
+    "createDB": "echo \"DROP SCHEMA IF EXISTS \\`hammer_koma\\`; CREATE SCHEMA IF NOT EXISTS \\`hammer_koma\\` DEFAULT CHARACTER SET utf8 ;\" | mysql -u root -p",
+    "initDB": "npm run build && node dist/db/init_database.js",
+    "initTestDB": "npm run createDB && npm run initDB",
     "lint": "eslint src/. --ext .js",
     "build": "babel src --out-dir dist && apidoc -i src/ -o docs/",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
@@ -40,8 +43,10 @@
     "fs-extra": "^5.0.0",
     "helmet": "^3.10.0",
     "morgan": "1.9.0",
+    "mysql2": "^1.5.2",
     "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",
+    "sequelize": "^4.33.4",
     "winston": "^3.0.0-rc1"
   },
   "devDependencies": {

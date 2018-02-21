@@ -17,5 +17,21 @@
   },
   "auth": {
     "secret": ""
+  },
+
+  "database": {
+    "database": "",
+    "username": "",
+    "password": "",
+    "options": {
+      "host": "",
+      "dialect": "",
+      "pool": {
+        "max": 5,
+        "min": 0,
+        "acquire": 30000,
+        "idle": 10000
+      }
+    }
   }
 }

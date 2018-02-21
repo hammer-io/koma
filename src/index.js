@@ -9,6 +9,7 @@ import * as tokens from './routes/tokens.routes';
 import * as heartbeats from './routes/heatbeat.routes';
 import * as index from './routes/index.routes';
 import * as firebase from './utils/firebase';
+import * as sequelize from './db/sequelize';
 import FirebaseService from './services/firebase.service';
 import HeartbeatService from './services/heartbeats.service';
 import TokenService from './services/token.service';
@@ -18,6 +19,9 @@ import './utils/passport.initialization';
 
 // setup firebase
 firebase.init();
+
+// database setup
+sequelize.initSequelize();
 
 // dependency injections
 const firebaseService = new FirebaseService(firebase.instance, getActiveLogger());
