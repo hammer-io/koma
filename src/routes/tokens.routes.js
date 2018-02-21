@@ -1,6 +1,7 @@
 import express from 'express';
 import passport from 'passport';
 import * as controller from '../controllers/tokens.controller';
+import * as middleware from '../middlewares/tokens.middleware';
 
 export const router = express.Router();
 
@@ -22,9 +23,22 @@ router.use(passport.authenticate('bearer', { session: false }));
  * @apiPermission Endor only (Authorization: "Bearer <token>")
  *
  * @apiParam {String} projectId The id of the project to create the token for
+ *
+ * @apiSuccess {Object} token an object with the token information such as id, token, projectId,
+ * and created/updated dates
+ *
+ * @apiSuccessExample {json} Success Response
+ * {
+    "token": {
+        "id": "8b004799-23ff-4f23-9567-c64112caf9e9",
+        "token": "57045c56-1bd4-435b-9a9a-e03a906fa723",
+        "projectId": "a3",
+        "updatedAt": "2018-02-21T00:31:12.293Z",
+        "createdAt": "2018-02-21T00:31:12.293Z"
+    }
+  }
  */
-router.post('/tokens', controller.generateNewToken);
-
+router.post('/tokens', middleware.checkCreateNewToken(), controller.generateNewToken);
 
 /**
  * @api {get} /tokens Get Tokens
@@ -36,8 +50,9 @@ router.post('/tokens', controller.generateNewToken);
  *
  * @apiParam {String} projectId The id of the project to filter tokens by
  * @apiParam [String] tokenId The id of the token being requested (not the token string itself)
+
  */
-router.get('/tokens', controller.getTokens);
+router.get('/tokens ', controller.getTokens);
 
 /**
  * @api {delete} /tokens/:tokenId Delete Token

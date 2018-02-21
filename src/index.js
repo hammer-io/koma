@@ -9,7 +9,7 @@ import * as tokens from './routes/tokens.routes';
 import * as heartbeats from './routes/heatbeat.routes';
 import * as index from './routes/index.routes';
 import * as firebase from './utils/firebase';
-import * as sequelize from './db/sequelize';
+import sequelize from './db/sequelize';
 import FirebaseService from './services/firebase.service';
 import HeartbeatService from './services/heartbeats.service';
 import TokenService from './services/token.service';
@@ -23,11 +23,13 @@ firebase.init();
 // database setup
 sequelize.initSequelize();
 
+console.log(sequelize.Credentials);
+
 // dependency injections
 const firebaseService = new FirebaseService(firebase.instance, getActiveLogger());
 const heartbeatService = new HeartbeatService(firebaseService, getActiveLogger());
 heartbeats.setDependencies(heartbeatService);
-const tokenService = new TokenService(getActiveLogger());
+const tokenService = new TokenService(sequelize.Credentials, getActiveLogger());
 tokens.setDependencies(tokenService);
 
 // end dependency injections

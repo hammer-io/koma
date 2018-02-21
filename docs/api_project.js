@@ -1,16 +1,1 @@
-define({
-  "name": "koma",
-  "version": "1.0.0",
-  "description": "Service to accept heartbeat and data information and store it.",
-  "title": "koma",
-  "url": "localhost:4000/api/v1",
-  "sampleUrl": false,
-  "defaultVersion": "0.0.0",
-  "apidoc": "0.3.0",
-  "generator": {
-    "name": "apidoc",
-    "time": "2018-02-20T05:56:47.195Z",
-    "url": "http://apidocjs.com",
-    "version": "0.17.6"
-  }
-});
+define({  "name": "koma",  "version": "1.0.0",  "description": "Service to accept heartbeat and data information and store it.",  "title": "koma",  "url": "localhost:4000/api/v1",  "sampleUrl": false,  "defaultVersion": "0.0.0",  "apidoc": "0.3.0",  "generator": {    "name": "apidoc",    "time": "2018-02-21T00:37:46.457Z",    "url": "http://apidocjs.com",    "version": "0.17.6"  }});
