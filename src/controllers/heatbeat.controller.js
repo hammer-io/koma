@@ -1,5 +1,3 @@
-import { validationResult } from 'express-validator/check';
-
 let heartbeatService = {};
 
 
@@ -10,13 +8,10 @@ let heartbeatService = {};
  * @param next the next middleware
  */
 export async function postNewHeartbeat(req, res, next) {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.mapped() });
-  }
-
   try {
-    await heartbeatService.postHeartbeatToFirebase(req.body.projectId);
+    // a "user" in terms of the passport is whoever is needing to be authenticated. In our case,
+    // the user is the project
+    await heartbeatService.postHeartbeatToFirebase(req.user.projectId);
     res.send('success');
   } catch (error) {
     next(error);

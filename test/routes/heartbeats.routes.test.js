@@ -10,40 +10,21 @@ const endpoint = '/heartbeats';
 
 describe('Testing Tokens Routes', () => {
   describe(`POST /heartbeats`, () => {
-    it('should return a 400 if there is not a projectId', (done) => {
+    it('should return a 401 if the token is not valid', (done) => {
       chai.request(server)
         .post(`${apiUtil.API}${endpoint}`)
-        .send({ 'projectId': 'p1' })
-        .end((err, res) => {
-          res.should.have.status(400);
-          done();
-        });
-    });
-
-    it('should return a 400 if there is not a token', (done) => {
-      chai.request(server)
-        .post(`${apiUtil.API}${endpoint}`)
-        .send({ 'token': 't1' })
-        .end((err, res) => {
-          res.should.have.status(400);
-          done();
-        });
-    });
-
-    it('should return a 401 if the token & projectId combo is not valid', (done) => {
-      chai.request(server)
-        .post(`${apiUtil.API}${endpoint}`)
-        .send({ 'projectId': 'p1', 'token': 't10000' })
+        .set('Authorization', apiUtil.bearerAuthorization('itsatrickgetanaxe'))
+        .send()
         .end((err, res) => {
           res.should.have.status(401);
           done();
         });
     });
     it('should return a 200 if the operation was successful', (done) => {
-      const start = Date.now();
       chai.request(server)
         .post(`${apiUtil.API}${endpoint}`)
-        .send({ 'projectId': 'p1', 'token': 't1' })
+        .set('Authorization', apiUtil.bearerAuthorization('t1'))
+        .send()
         .end((err, res) => {
           res.should.have.status(200);
           done();

@@ -53,6 +53,22 @@ describe('Testing Tokens Service', () => {
     });
   });
 
+  describe('getProjectIdByToken()', async () => {
+    it('should get a projectId for a token', async () => {
+      const project = await tokenService.getProjectIdByToken('t1');
+      expect(project).to.equal('p1');
+    });
+
+    it('should throw an error if there is no token', async () => {
+      try {
+        const token = await tokenService.getProjectIdByToken('t10000');
+        expect(true).to.equal(false); // should fail
+      } catch (error) {
+        expect(error.message).to.equal('Token t10000 not found');
+      }
+    });
+  });
+
   describe('deleteToken()', async () => {
     it('should successfully delete a token' , async () => {
       await tokenService.deleteToken('p1');

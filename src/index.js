@@ -22,8 +22,6 @@ firebase.init();
 // database setup
 sequelize.initSequelize();
 
-console.log(sequelize.Credentials);
-
 // dependency injections
 const firebaseService = new FirebaseService(firebase.instance, getActiveLogger());
 const heartbeatService = new HeartbeatService(firebaseService, getActiveLogger());

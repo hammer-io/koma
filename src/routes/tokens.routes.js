@@ -37,7 +37,7 @@ router.use((req, res, next) => {
  */
 router.post(
   '/tokens',
-  authentication.isEndorAuthenticated,
+  authentication.endorAuthenticate,
   middleware.checkCreateNewToken(),
   controller.generateNewToken
 );
@@ -69,7 +69,7 @@ router.post(
  */
 router.get(
   '/tokens/:tokenOrProjectId',
-  authentication.isEndorAuthenticated,
+  authentication.endorAuthenticate,
   controller.getToken
 );
 
@@ -86,7 +86,7 @@ router.get(
  */
 router.delete(
   '/tokens/:tokenOrProjectId',
-  authentication.isEndorAuthenticated,
+  authentication.endorAuthenticate,
   controller.deleteToken
 );
 

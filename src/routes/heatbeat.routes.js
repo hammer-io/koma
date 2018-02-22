@@ -1,7 +1,6 @@
 import express from 'express';
 import authentication from '../utils/authentication';
 import * as heartbeatsController from '../controllers/heatbeat.controller';
-import * as heartbeatsMiddleware from '../middlewares/heatbeats.middleware';
 
 export const router = express.Router();
 
@@ -11,10 +10,7 @@ export const router = express.Router();
  * @apiName Post Heartbeat
  * @apiGroup Heartbeats
  *
- * @apiPermission Authenticated Project
- *
- * @apiParam {String} projectId The id of the project which is posting a new heartbeat
- * @apiParam {String} token The token for authentication
+ * @apiPermission Bearer token such as 'Bearer 123-abc-456-def'
  *
  * @apiParamExample {json} Request Example:
  * {
@@ -24,8 +20,7 @@ export const router = express.Router();
  */
 router.post(
   '/heartbeats',
-  heartbeatsMiddleware.checkPostNewHeartbeats(),
-  authentication.isTokenAuthenticated,
+  authentication.tokenAuthenticate,
   heartbeatsController.postNewHeartbeat
 );
 

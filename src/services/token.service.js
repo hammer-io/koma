@@ -54,6 +54,25 @@ export default class TokenService {
   }
 
   /**
+   * Gets a project by the token
+   * @param token not the token id, but rather the token itself
+   * @returns {Promise<void>} the project id
+   */
+  async getProjectIdByToken(token) {
+    const tokenFound = await this.tokenRepository.find({
+      where: {
+        token
+      }
+    });
+
+    if (!tokenFound) {
+      throw new TokenNotFound(`Token ${token} not found`);
+    }
+
+    return tokenFound.projectId;
+  }
+
+  /**
    * Deletes a token by token id or project id
    * @param id the id of the token to delete
    */
