@@ -1,5 +1,5 @@
 import express from 'express';
-import passport from 'passport';
+import authentication from '../utils/authentication';
 import * as controller from '../controllers/tokens.controller';
 import * as middleware from '../middlewares/tokens.middleware';
 
@@ -10,9 +10,6 @@ router.use((req, res, next) => {
   const delayMillis = 1000;
   setTimeout(next, delayMillis);
 });
-
-// Every request to the API must be authenticated via the bearer API token
-router.use(passport.authenticate('bearer', { session: false }));
 
 /**
  * @api {post} /tokens Create API Token
@@ -38,7 +35,12 @@ router.use(passport.authenticate('bearer', { session: false }));
     }
   }
  */
-router.post('/tokens', middleware.checkCreateNewToken(), controller.generateNewToken);
+router.post(
+  '/tokens',
+  authentication.isEndorAuthenticated,
+  middleware.checkCreateNewToken(),
+  controller.generateNewToken
+);
 
 /**
  * @api {get} /tokens Get Token
@@ -65,7 +67,11 @@ router.post('/tokens', middleware.checkCreateNewToken(), controller.generateNewT
     }
   }
  */
-router.get('/tokens/:tokenOrProjectId', controller.getToken);
+router.get(
+  '/tokens/:tokenOrProjectId',
+  authentication.isEndorAuthenticated,
+  controller.getToken
+);
 
 /**
  * @api {delete} /tokens/:tokenId Delete Token
@@ -78,7 +84,11 @@ router.get('/tokens/:tokenOrProjectId', controller.getToken);
  * @apiParam {String} tokenOrProjectId the project id or token id (note API token, but they
  * token id itself) to to delete
  */
-router.delete('/tokens/:tokenOrProjectId', controller.deleteToken);
+router.delete(
+  '/tokens/:tokenOrProjectId',
+  authentication.isEndorAuthenticated,
+  controller.deleteToken
+);
 
 export function setDependencies(tokensService) {
   controller.setDependencies(tokensService);

@@ -22,11 +22,10 @@ describe('Testing Tokens Routes', () => {
           done();
         });
     });
-    it('should return stats 401 Unauthorized if authorization is missing', (done) => {
+    it('should return status 401 Unauthorized if authorization is missing', (done) => {
       const start = Date.now();
       chai.request(server)
-        .get(`${apiUtil.API}${endpoint}`)
-        .query({ "projectId": "123abc" })
+        .get(`${apiUtil.API}${endpoint}/123abc`)
         .end((err, res) => {
           const duration = Date.now() - start;
           expect(duration).to.be.greaterThan(1000);
@@ -37,9 +36,8 @@ describe('Testing Tokens Routes', () => {
     it('should return stats 401 Unauthorized if authorization is invalid', (done) => {
       const start = Date.now();
       chai.request(server)
-        .delete(`${apiUtil.API}${endpoint}`)
+        .delete(`${apiUtil.API}${endpoint}/123abc`)
         .set('Authorization', apiUtil.bearerAuthorization('itsatrickgetanaxe'))
-        .send({ "projectId": "123abc" })
         .end((err, res) => {
           const duration = Date.now() - start;
           expect(duration).to.be.greaterThan(1000);
