@@ -18,11 +18,4 @@ export default class FirebaseService {
       timestamp: currentTime
     });
   }
-
-  async getHeartbeatsFromFirebase(projectId) {
-    this.log.verbose(`FirebaseService.getHeartbeatsFromFirebase(): Getting heartbeats for project with id: ${projectId}`);
-    const heartbeatsRef = this.firebase.database().ref(`/heartbeats/${projectId}`);
-    const heartbeats = await heartbeatsRef.once('value');
-    return heartbeats;
-  }
 }

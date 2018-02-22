@@ -18,15 +18,4 @@ export default class HeartbeatService {
     this.log.verbose(`HeartbeatService.postHeartbeatToFirebase(): Posting heartbeat for project with id: ${id}`);
     this.firebaseService.postHeartbeatToFirebase(id);
   }
-
-  /**
-   * Posts are heartbeat to firebase
-   *
-   * @param id the of the project to fetch heartbeats for
-   */
-  async getHeartbeatsFromFirebase(id) {
-    this.log.verbose(`HeartbeatService.getHeartbeatsFromFirebase(): Getting heartbeats for project with id: ${id}`);
-    const heartbeats = await this.firebaseService.getHeartbeatsFromFirebase(id);
-    return heartbeats;
-  }
 }

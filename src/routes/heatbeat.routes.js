@@ -22,10 +22,12 @@ export const router = express.Router();
  * }
  *
  */
-router.post('/heartbeats', authentication.isTokenAuthenticated, heartbeatsMiddleware.checkPostNewHeartbeats(), heartbeatsController.postNewHeartbeat);
-
-// for testing purposes only
-// router.get('/heartbeats/:id', heartbeatsController.getHeartbeats);
+router.post(
+  '/heartbeats',
+  heartbeatsMiddleware.checkPostNewHeartbeats(),
+  authentication.isTokenAuthenticated,
+  heartbeatsController.postNewHeartbeat
+);
 
 export function setDependencies(heartbeatService) {
   heartbeatsController.setDependencies(heartbeatService);

@@ -23,21 +23,6 @@ export async function postNewHeartbeat(req, res, next) {
   }
 }
 
-/**
- * Controller for GET /heartbeats/:id
- * @param req the request object
- * @param res the response object
- * @param next the next middleware
- */
-export async function getHeartbeats(req, res, next) {
-  try {
-    const heartbeats = await heartbeatService.getHeartbeatsFromFirebase(req.params.id);
-    res.send({ heartbeats });
-  } catch (error) {
-    next(error);
-  }
-}
-
 export function setDependencies(newHeartBeatService) {
   heartbeatService = newHeartBeatService;
 }
