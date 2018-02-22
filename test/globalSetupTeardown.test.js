@@ -1,6 +1,8 @@
 import MockFirebase from './test-utils/mockFirebase'
 import { getActiveLogger } from '../src/utils/winston';
 import * as firebase from '../src/utils/firebase';
+import Sequelize from '../src/db/sequelize';
+import * as db from '../src/db/init_database';
 
 firebase.set(new MockFirebase(), {});
 const server = require('../src/index');
@@ -23,8 +25,14 @@ after(() => {
 
 let testIndex = 0;
 
-beforeEach(() => {
+beforeEach(async () => {
   getActiveLogger().info(`::::::: TEST ${testIndex++}`);
+  await db.defineTables();
+  Sequelize.Credentials.create({
+    id: 'i1',
+    token: 't1',
+    projectId: 'p1'
+  });
 });
 
 module.exports = server;

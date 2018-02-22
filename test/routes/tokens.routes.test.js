@@ -51,27 +51,71 @@ describe('Testing Tokens Routes', () => {
 
   describe(`POST ${endpoint}`, () => {
     it('should return a new token for the project', (done) => {
-      const req = { "projectId": "123abc" };
+      const req = { "projectId": "p2" };
       chai.request(server)
         .post(`${apiUtil.API}${endpoint}`)
         .set('Authorization', apiUtil.bearerAuthorization('supersecret'))
         .send(req)
         .end((err, res) => {
-          res.should.have.status(200);
+          res.should.have.status(201);
           expect(err).to.be.a('null');
-          // expect(res.body).to.be.an('object');
-          // expect(res.body.access_token.expired).to.equal(false);
-          // expect(res.body.access_token.value).to.not.be.an('undefined');
-          // expect(res.body.access_token.userId).to.equal('a3');
-          // expect(res.body.token_type).to.equal('Bearer');
+          expect(res.body).to.be.an('object');
+          expect(res.body.token.token).to.not.be.an('undefined');
+          expect(res.body.token.id).to.not.be.an('undefined');
+          expect(res.body.token.projectId).to.equal('p2');
           done();
         });
     });
   });
 
   describe(`GET ${endpoint}`, () => {
+    it('should return a token for the project', (done) => {
+      chai.request(server)
+        .get(`${apiUtil.API}${endpoint}/p1`)
+        .set('Authorization', apiUtil.bearerAuthorization('supersecret'))
+        .end((err, res) => {
+          res.should.have.status(200);
+          expect(err).to.be.a('null');
+          expect(res.body).to.be.an('object');
+          expect(res.body.token.token).to.equal('t1');
+          expect(res.body.token.id).to.equal('i1');
+          expect(res.body.token.projectId).to.equal('p1');
+          done();
+        });
+    });
+
+    it('should have an error if the token cannot be found', (done) => {
+      chai.request(server)
+        .get(`${apiUtil.API}${endpoint}/p10000`)
+        .set('Authorization', apiUtil.bearerAuthorization('supersecret'))
+        .end((err, res) => {
+          console.log(err.response.body);
+          res.should.have.status(404);
+          done();
+        });
+    })
   });
 
   describe(`DELETE ${endpoint}/:tokenId`, () => {
+    it('should delete the token', (done) => {
+      chai.request(server)
+        .delete(`${apiUtil.API}${endpoint}/p1`)
+        .set('Authorization', apiUtil.bearerAuthorization('supersecret'))
+        .end((err, res) => {
+          res.should.have.status(204);
+          done();
+        });
+    });
+
+    it('should have an error if the token cannot be found', (done) => {
+      chai.request(server)
+        .delete(`${apiUtil.API}${endpoint}/p10000`)
+        .set('Authorization', apiUtil.bearerAuthorization('supersecret'))
+        .end((err, res) => {
+          console.log(err.response.body);
+          res.should.have.status(404);
+          done();
+        });
+    })
   });
 });
