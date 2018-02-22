@@ -19,7 +19,7 @@
     "secret": ""
   },
 
-  "database": {
+  "tokenDatabase": {
     "database": "",
     "username": "",
     "password": "",

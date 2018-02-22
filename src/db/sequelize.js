@@ -37,7 +37,7 @@ function initManually(database, username, password, options) {
 
 function initWithConfigs() {
   if (!initialized) {
-    const db = config.get('database');
+    const db = config.get('tokenDatabase');
     initManually(db.database, db.username, db.password, db.options);
   }
 }
