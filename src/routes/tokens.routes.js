@@ -22,7 +22,7 @@ router.use(passport.authenticate('bearer', { session: false }));
  *
  * @apiPermission Endor only (Authorization: "Bearer <token>")
  *
- * @apiParam {String} projectId The id of the project to create the token for
+ * @apiParam {String} tokenOrProjectId The id of the project to create the token for
  *
  * @apiSuccess {Object} token an object with the token information such as id, token, projectId,
  * and created/updated dates
@@ -48,8 +48,8 @@ router.post('/tokens', middleware.checkCreateNewToken(), controller.generateNewT
  *
  * @apiPermission Endor only (Authorization: "Bearer <token>")
  *
- * @apiParam {String} id the project id or token id (note API token, but they token id itself) to
- * to get
+ * @apiParam {String} tokenOrProjectId the project id or token id (note API token, but they token id
+ * itself) to to get
  *
  * @apiSuccess {Object} token an object with the token information such as id, token, projectId,
  * and created/updated dates
@@ -65,7 +65,7 @@ router.post('/tokens', middleware.checkCreateNewToken(), controller.generateNewT
     }
   }
  */
-router.get('/tokens/:id', controller.getToken);
+router.get('/tokens/:tokenOrProjectId', controller.getToken);
 
 /**
  * @api {delete} /tokens/:tokenId Delete Token
@@ -75,10 +75,10 @@ router.get('/tokens/:id', controller.getToken);
  *
  * @apiPermission Endor only (Authorization: "Bearer <token>")
  *
- * @apiParam {String} the project id or token id (note API token, but they token id itself) to
- * to delete
+ * @apiParam {String} tokenOrProjectId the project id or token id (note API token, but they
+ * token id itself) to to delete
  */
-router.delete('/tokens/:id', controller.deleteToken);
+router.delete('/tokens/:tokenOrProjectId', controller.deleteToken);
 
 export function setDependencies(tokensService) {
   controller.setDependencies(tokensService);

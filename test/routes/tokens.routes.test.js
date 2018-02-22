@@ -89,7 +89,6 @@ describe('Testing Tokens Routes', () => {
         .get(`${apiUtil.API}${endpoint}/p10000`)
         .set('Authorization', apiUtil.bearerAuthorization('supersecret'))
         .end((err, res) => {
-          console.log(err.response.body);
           res.should.have.status(404);
           done();
         });
@@ -112,7 +111,6 @@ describe('Testing Tokens Routes', () => {
         .delete(`${apiUtil.API}${endpoint}/p10000`)
         .set('Authorization', apiUtil.bearerAuthorization('supersecret'))
         .end((err, res) => {
-          console.log(err.response.body);
           res.should.have.status(404);
           done();
         });

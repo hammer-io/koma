@@ -24,14 +24,14 @@ export async function generateNewToken(req, res, next) {
 }
 
 /**
- * Controller for GET /tokens/:id route
+ * Controller for GET /tokens/:tokenOrProjectId route
  * @param req the request
  * @param res the response
  * @param next the next middleware
  */
 export async function getToken(req, res, next) {
   try {
-    const token = await tokenService.getToken(req.params.id);
+    const token = await tokenService.getToken(req.params.tokenOrProjectId);
     res.send({ token });
   } catch (error) {
     next(error);
@@ -39,14 +39,14 @@ export async function getToken(req, res, next) {
 }
 
 /**
- * Controller for DELETE /tokens/:id route
+ * Controller for DELETE /tokens/:tokenOrProjectId route
  * @param req the request
  * @param res the response
  * @param next the next middleware
  */
 export async function deleteToken(req, res, next) {
   try {
-    await tokenService.deleteToken(req.params.id);
+    await tokenService.deleteToken(req.params.tokenOrProjectId);
     res.status(204).send();
   } catch (error) {
     next(error);
