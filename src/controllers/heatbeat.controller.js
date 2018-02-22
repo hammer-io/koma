@@ -16,7 +16,7 @@ export async function postNewHeartbeat(req, res, next) {
   }
 
   try {
-    await heartbeatService.postHeartbeatToFirebase(req.body.id);
+    await heartbeatService.postHeartbeatToFirebase(req.body.projectId);
     res.send('success');
   } catch (error) {
     next(error);

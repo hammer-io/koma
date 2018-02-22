@@ -1,4 +1,5 @@
 import express from 'express';
+import authentication from '../utils/authentication';
 import * as heartbeatsController from '../controllers/heatbeat.controller';
 import * as heartbeatsMiddleware from '../middlewares/heatbeats.middleware';
 
@@ -10,9 +11,10 @@ export const router = express.Router();
  * @apiName Post Heartbeat
  * @apiGroup Heartbeats
  *
- * @apiPermission None
+ * @apiPermission Authenticated Project
  *
- * @apiParam {String} id The id of the project which is posting a new heartbeat
+ * @apiParam {String} projectId The id of the project which is posting a new heartbeat
+ * @apiParam {String} token The token for authentication
  *
  * @apiParamExample {json} Request Example:
  * {
@@ -20,27 +22,10 @@ export const router = express.Router();
  * }
  *
  */
-router.post('/heartbeats', heartbeatsMiddleware.checkPostNewHeartbeats(), heartbeatsController.postNewHeartbeat);
+router.post('/heartbeats', authentication.isTokenAuthenticated, heartbeatsMiddleware.checkPostNewHeartbeats(), heartbeatsController.postNewHeartbeat);
 
-
-/**
- * @api {get} /heartbeats/:id Get Heartbeats
- * @apiVersion 1.0.0
- * @apiName Get Heartbeat
- * @apiGroup Heartbeats
- *
- * @apiPermission None
- *
- * @apiParam {String} id The id of the project which is posting a new heartbeat
- *
- * @apiSuccessExample {json} Response Example
- * HTTP/1.1 200 OK
- * [
- *  {"timestamp": "1452488445471"}
- * ]
- *
- */
-router.get('/heartbeats/:id', heartbeatsController.getHeartbeats);
+// for testing purposes only
+// router.get('/heartbeats/:id', heartbeatsController.getHeartbeats);
 
 export function setDependencies(heartbeatService) {
   heartbeatsController.setDependencies(heartbeatService);

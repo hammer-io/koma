@@ -14,7 +14,6 @@ import FirebaseService from './services/firebase.service';
 import HeartbeatService from './services/heartbeats.service';
 import TokenService from './services/token.service';
 import { getActiveLogger } from './utils/winston';
-import './utils/passport.initialization';
 
 
 // setup firebase
