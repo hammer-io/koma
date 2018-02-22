@@ -10,7 +10,7 @@ const endpoint = '/heartbeats';
 
 describe('Testing Tokens Routes', () => {
   describe(`POST /heartbeats`, () => {
-    it('should return a 400 if the user is does not have a projectId', (done) => {
+    it('should return a 400 if there is not a projectId', (done) => {
       chai.request(server)
         .post(`${apiUtil.API}${endpoint}`)
         .send({ 'projectId': 'p1' })
@@ -20,7 +20,7 @@ describe('Testing Tokens Routes', () => {
         });
     });
 
-    it('should return a 400 if the user is does not have a token', (done) => {
+    it('should return a 400 if there is not a token', (done) => {
       chai.request(server)
         .post(`${apiUtil.API}${endpoint}`)
         .send({ 'token': 't1' })
@@ -30,7 +30,7 @@ describe('Testing Tokens Routes', () => {
         });
     });
 
-    it('should return a 401 if the user is unauthenticated (token & projectId combo not valid)', (done) => {
+    it('should return a 401 if the token & projectId combo is not valid', (done) => {
       chai.request(server)
         .post(`${apiUtil.API}${endpoint}`)
         .send({ 'projectId': 'p1', 'token': 't10000' })
