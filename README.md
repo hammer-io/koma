@@ -2,6 +2,7 @@
 Service to accept heartbeat and data information and store it
 
 [![Build Status](https://travis-ci.org/hammer-io/koma.svg?branch=master)](https://travis-ci.org/hammer-io/koma)
+[![codecov](https://codecov.io/gh/hammer-io/koma/branch/master/graph/badge.svg)](https://codecov.io/gh/hammer-io/koma)
 
 ## Getting Started For Development
 1. Fork the repository
