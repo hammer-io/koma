@@ -18,4 +18,22 @@ export default class FirebaseService {
       timestamp: currentTime
     });
   }
+
+  /**
+   * Posts os data for the given project
+   * @param projectId the project id to send to firebase
+   * @param data the os memory data
+   * @returns {Promise<void>}
+   */
+  async postOSDataToFirebase(projectId, data) {
+    this.log.verbose(`FirebaseService.postOSDataToFirebase(): Posting os data for project with id: ${projectId}`);
+    const osdata = this.firebase.database().ref('/osdata');
+    const osdataRef = osdata.child(projectId);
+    osdataRef.push({
+      memoryUsed: data.memoryUsed,
+      totalMemory: data.totalMemory,
+      freeMemory: data.freeMemory,
+      timestamp: data.timestamp
+    });
+  }
 }
