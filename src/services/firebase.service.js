@@ -36,4 +36,22 @@ export default class FirebaseService {
       timestamp: data.timestamp
     });
   }
+
+  /**
+   * Posts HTTP data for the given project to firebase
+   * @param projectId the project id to send to firebase
+   * @param data the http data
+   * @returns {Promise<void>}
+   */
+  async postHTTPDataToFirebase(projectId, data) {
+    this.log.verbose(`FirebaseService.postOSDataToFirebase(): Posting http data for project with id: ${projectId}`);
+
+    const httpdata = this.firebase.database().ref('/httpdata');
+    const httpdataRef = httpdata.child(projectId);
+    httpdataRef.push({
+      type: data.type,
+      size: data.size,
+      timestamp: data.timestamp
+    });
+  }
 }
