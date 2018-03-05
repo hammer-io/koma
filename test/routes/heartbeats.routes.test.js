@@ -26,7 +26,7 @@ describe('Testing Tokens Routes', () => {
         .set('Authorization', apiUtil.bearerAuthorization('t1'))
         .send()
         .end((err, res) => {
-          res.should.have.status(200);
+          res.should.have.status(204);
           done();
         });
     });

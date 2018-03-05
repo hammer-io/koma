@@ -12,7 +12,7 @@ export async function postNewOSData(req, res, next) {
     // a "user" in terms of the passport is whoever is needing to be authenticated. In our case,
     // the user is the project
     await osDataService.postOSDataToFirebase(req.user.projectId, req.body);
-    res.send('success');
+    res.status(204).send();
   } catch (error) {
     next(error);
   }

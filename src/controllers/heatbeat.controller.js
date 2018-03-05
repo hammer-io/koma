@@ -12,7 +12,7 @@ export async function postNewHeartbeat(req, res, next) {
     // a "user" in terms of the passport is whoever is needing to be authenticated. In our case,
     // the user is the project
     await heartbeatService.postHeartbeatToFirebase(req.user.projectId);
-    res.send('success');
+    res.status(204).send();
   } catch (error) {
     next(error);
   }
