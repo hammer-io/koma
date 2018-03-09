@@ -49,8 +49,10 @@ export default class FirebaseService {
     const httpdata = this.firebase.database().ref('/httpdata');
     const httpdataRef = httpdata.child(projectId);
     httpdataRef.push({
+      url: data.url,
       type: data.type,
       size: data.size,
+      method: data.method,
       timestamp: data.timestamp
     });
   }
