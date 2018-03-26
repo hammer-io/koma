@@ -13,9 +13,10 @@ export default class HeartbeatService {
    * Posts are heartbeat to firebase
    *
    * @param id the of the project for the heartbeat
+   * @param data the data for the heartbeat
    */
-  async postHeartbeatToFirebase(id) {
+  async postHeartbeatToFirebase(id, data) {
     this.log.verbose(`HeartbeatService.postHeartbeatToFirebase(): Posting heartbeat for project with id: ${id}`);
-    this.firebaseService.postHeartbeatToFirebase(id);
+    this.firebaseService.postHeartbeatToFirebase(id, data);
   }
 }

@@ -7,15 +7,17 @@ export default class FirebaseService {
   /**
    * Posts a heartbeat for the given proejct id
    * @param projectId the project id to post a heartbeat for
+   * @param data the data for a heartbeat
    */
-  async postHeartbeatToFirebase(projectId) {
+  async postHeartbeatToFirebase(projectId, data) {
     this.log.verbose(`FirebaseService.postHeartbeatToFirebase(): Posting heartbeat for project with id: ${projectId}`);
     const currentTime = Date.now();
 
     const heartbeats = this.firebase.database().ref('/heartbeats');
     const applicationHeartbeatsRef = heartbeats.child(projectId);
     applicationHeartbeatsRef.push({
-      timestamp: currentTime
+      timestamp: currentTime,
+      interval: data.interval
     });
   }
 
