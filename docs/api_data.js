@@ -1,1 +1,320 @@
-define({ "api": [  {    "type": "post",    "url": "/httpdata",    "title": "Post New HTTP Data",    "version": "1.0.0",    "name": "Post_HTTP_Data",    "group": "HTTP_Data",    "permission": [      {        "name": "Bearer token such as 'Bearer 123-abc-456-def'\n*"      }    ],    "parameter": {      "examples": [        {          "title": "Request Example:",          "content": "{\n \"type\": \"request or response\",\n \"size\": 500,\n \"timestamp\": 1519933640293\n}",          "type": "json"        }      ]    },    "filename": "src/routes/httpdata.routes.js",    "groupTitle": "HTTP_Data"  },  {    "type": "post",    "url": "/heartbeats",    "title": "Post New Heartbeat",    "version": "1.0.0",    "name": "Post_Heartbeat",    "group": "Heartbeats",    "permission": [      {        "name": "Bearer token such as 'Bearer 123-abc-456-def'"      }    ],    "parameter": {      "examples": [        {          "title": "Request Example:",          "content": "{\n \"id\": \"111-1111-111\"\n}",          "type": "json"        }      ]    },    "filename": "src/routes/heatbeat.routes.js",    "groupTitle": "Heartbeats"  },  {    "type": "post",    "url": "/osdata",    "title": "Post New Heartbeat",    "version": "1.0.0",    "name": "Post_OS_Data",    "group": "OS_Data",    "permission": [      {        "name": "Bearer token such as 'Bearer 123-abc-456-def'"      }    ],    "parameter": {      "examples": [        {          "title": "Request Example:",          "content": "{\n \"freeMemory\": 500,\n \"totalMemory\": 1000,\n \"memoryUsed\": .5,\n \"timestamp\" \"1519933640293\"\n}",          "type": "json"        }      ]    },    "filename": "src/routes/osdata.routes.js",    "groupTitle": "OS_Data"  },  {    "type": "delete",    "url": "/tokens/:tokenId",    "title": "Delete Token",    "version": "1.0.0",    "name": "Delete_Token",    "group": "Tokens",    "permission": [      {        "name": "Endor only (Authorization: \"Bearer <token>\")"      }    ],    "parameter": {      "fields": {        "Parameter": [          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "tokenOrProjectId",            "description": "<p>the project id or token id (note API token, but they token id itself) to to delete</p>"          }        ]      }    },    "filename": "src/routes/tokens.routes.js",    "groupTitle": "Tokens"  },  {    "type": "get",    "url": "/tokens",    "title": "Get Token",    "version": "1.0.0",    "name": "Get_Token",    "group": "Tokens",    "permission": [      {        "name": "Endor only (Authorization: \"Bearer <token>\")"      }    ],    "parameter": {      "fields": {        "Parameter": [          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "tokenOrProjectId",            "description": "<p>the project id or token id (note API token, but they token id itself) to to get</p>"          }        ]      }    },    "success": {      "fields": {        "Success 200": [          {            "group": "Success 200",            "type": "Object",            "optional": false,            "field": "token",            "description": "<p>an object with the token information such as id, token, projectId, and created/updated dates</p>"          }        ]      },      "examples": [        {          "title": "Success Response",          "content": "{\n    \"token\": {\n        \"id\": \"8b004799-23ff-4f23-9567-c64112caf9e9\",\n        \"token\": \"57045c56-1bd4-435b-9a9a-e03a906fa723\",\n        \"projectId\": \"a3\",\n        \"updatedAt\": \"2018-02-21T00:31:12.293Z\",\n        \"createdAt\": \"2018-02-21T00:31:12.293Z\"\n    }\n  }",          "type": "json"        }      ]    },    "filename": "src/routes/tokens.routes.js",    "groupTitle": "Tokens"  },  {    "type": "post",    "url": "/tokens",    "title": "Create API Token",    "version": "1.0.0",    "name": "Post_Token",    "group": "Tokens",    "permission": [      {        "name": "Endor only (Authorization: \"Bearer <token>\")"      }    ],    "parameter": {      "fields": {        "Parameter": [          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "tokenOrProjectId",            "description": "<p>The id of the project to create the token for</p>"          }        ]      }    },    "success": {      "fields": {        "Success 200": [          {            "group": "Success 200",            "type": "Object",            "optional": false,            "field": "token",            "description": "<p>an object with the token information such as id, token, projectId, and created/updated dates</p>"          }        ]      },      "examples": [        {          "title": "Success Response",          "content": "{\n    \"token\": {\n        \"id\": \"8b004799-23ff-4f23-9567-c64112caf9e9\",\n        \"token\": \"57045c56-1bd4-435b-9a9a-e03a906fa723\",\n        \"projectId\": \"a3\",\n        \"updatedAt\": \"2018-02-21T00:31:12.293Z\",\n        \"createdAt\": \"2018-02-21T00:31:12.293Z\"\n    }\n  }",          "type": "json"        }      ]    },    "filename": "src/routes/tokens.routes.js",    "groupTitle": "Tokens"  }] });
+define({ "api": [
+  {
+    "type": "post",
+    "url": "/httpdata",
+    "title": "Post New HTTP Data",
+    "version": "1.0.0",
+    "name": "Post_HTTP_Data",
+    "group": "HTTP_Data",
+    "permission": [
+      {
+        "name": "Bearer token such as 'Bearer 123-abc-456-def'"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>the status code of the request</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "url",
+            "description": "<p>the url being requested</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "requestSize",
+            "description": "<p>the size of the request (in bytes)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "allowedValues": [
+              "\"GET\"",
+              "\"HEAD\"",
+              "\"POST\"",
+              "\"PUT\"",
+              "\"DELETE\"",
+              "\"CONNECT\"",
+              "\"OPTIONS\"",
+              "\"TRACE\"",
+              "\"PATCH\""
+            ],
+            "optional": false,
+            "field": "method",
+            "description": "<p>the http method used</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "timestamp",
+            "description": "<p>the number of milliseconds since January 1, 1970, 00:00:00 UTC representing the timestamp of this request or response</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "responseTime",
+            "description": "<p>the number of milliseconds between request received and response sent</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request Example:",
+          "content": "{\n \"status\": \"200\",\n \"url\": \"/index.html\",\n \"requestSize\": 1280,\n \"method\": \"GET\",\n \"timestamp\": 1519933640293,\n \"responseTime\": 53\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routes/httpdata.routes.js",
+    "groupTitle": "HTTP_Data"
+  },
+  {
+    "type": "post",
+    "url": "/heartbeats",
+    "title": "Post New Heartbeat",
+    "version": "1.0.0",
+    "name": "Post_Heartbeat",
+    "group": "Heartbeats",
+    "permission": [
+      {
+        "name": "Bearer token such as 'Bearer 123-abc-456-def'"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "interval",
+            "description": "<p>the number of milliseconds until the next heartbeat is expected</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request Example:",
+          "content": "{\n \"interval\": 5000\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routes/heatbeat.routes.js",
+    "groupTitle": "Heartbeats"
+  },
+  {
+    "type": "post",
+    "url": "/osdata",
+    "title": "Post New OS Data",
+    "version": "1.0.0",
+    "name": "Post_OS_Data",
+    "group": "OS_Data",
+    "permission": [
+      {
+        "name": "Bearer token such as 'Bearer 123-abc-456-def'"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "freeMemory",
+            "description": "<p>the amount of free memory available (in bytes)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "totalMemory",
+            "description": "<p>the total size of memory (in bytes)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "size": "0.0-1.0",
+            "optional": false,
+            "field": "memoryUsed",
+            "description": "<p>the percentage of memory used</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "timestamp",
+            "description": "<p>the number of milliseconds since January 1, 1970, 00:00:00 UTC representing the timestamp of this snapshot</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request Example:",
+          "content": "{\n \"freeMemory\": 5000000000,\n \"totalMemory\": 10000000000,\n \"memoryUsed\": 0.5,\n \"timestamp\": \"1519933640293\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routes/osdata.routes.js",
+    "groupTitle": "OS_Data"
+  },
+  {
+    "type": "delete",
+    "url": "/tokens/:tokenId",
+    "title": "Delete Token",
+    "version": "1.0.0",
+    "name": "Delete_Token",
+    "group": "Tokens",
+    "permission": [
+      {
+        "name": "Endor only (Authorization: \"Bearer <token>\")"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "tokenOrProjectId",
+            "description": "<p>the project id or token id (note API token, but they token id itself) to to delete</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request Example:",
+          "content": "{\n \"tokenOrProjectId\": \"57045c56-1bd4-435b-9a9a-e03a906fa723\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routes/tokens.routes.js",
+    "groupTitle": "Tokens"
+  },
+  {
+    "type": "get",
+    "url": "/tokens",
+    "title": "Get Token",
+    "version": "1.0.0",
+    "name": "Get_Token",
+    "group": "Tokens",
+    "permission": [
+      {
+        "name": "Endor only (Authorization: \"Bearer <token>\")"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "tokenOrProjectId",
+            "description": "<p>the project id or token id (note API token, but they token id itself) to to get</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request Example:",
+          "content": "{\n \"tokenOrProjectId\": \"8b004799-23ff-4f23-9567-c64112caf9e9\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "token",
+            "description": "<p>an object with the token information such as id, token, projectId, and created/updated dates</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "{\n    \"token\": {\n        \"id\": \"8b004799-23ff-4f23-9567-c64112caf9e9\",\n        \"token\": \"57045c56-1bd4-435b-9a9a-e03a906fa723\",\n        \"projectId\": \"a3\",\n        \"updatedAt\": \"2018-02-21T00:31:12.293Z\",\n        \"createdAt\": \"2018-02-21T00:31:12.293Z\"\n    }\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routes/tokens.routes.js",
+    "groupTitle": "Tokens"
+  },
+  {
+    "type": "post",
+    "url": "/tokens",
+    "title": "Create API Token",
+    "version": "1.0.0",
+    "name": "Post_Token",
+    "group": "Tokens",
+    "permission": [
+      {
+        "name": "Endor only (Authorization: \"Bearer <token>\")"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "projectId",
+            "description": "<p>The id of the project to create the token for</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request Example:",
+          "content": "{\n \"projectId\": \"8b004799-23ff-4f23-9567-c64112caf9e9\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "token",
+            "description": "<p>an object with the token information such as id, token, projectId, and created/updated dates</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "{\n    \"token\": {\n        \"id\": \"8b004799-23ff-4f23-9567-c64112caf9e9\",\n        \"token\": \"57045c56-1bd4-435b-9a9a-e03a906fa723\",\n        \"projectId\": \"a3\",\n        \"updatedAt\": \"2018-02-21T00:31:12.293Z\",\n        \"createdAt\": \"2018-02-21T00:31:12.293Z\"\n    }\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routes/tokens.routes.js",
+    "groupTitle": "Tokens"
+  }
+] });

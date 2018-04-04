@@ -12,9 +12,11 @@ export const router = express.Router();
  *
  * @apiPermission Bearer token such as 'Bearer 123-abc-456-def'
  *
+ * @apiParam {Number} interval the number of milliseconds until the next heartbeat is expected
+ *
  * @apiParamExample {json} Request Example:
  * {
- *  "id": "111-1111-111"
+ *  "interval": 5000
  * }
  *
  */
