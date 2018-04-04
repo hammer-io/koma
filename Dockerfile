@@ -25,13 +25,13 @@ COPY package*.json ./
 RUN npm install --only=production && npm install \
   babel-cli@6.26.0 \
   babel-plugin-transform-async-to-generator@6.24.1 \
-  babel-preset-env@1.6.0
+  babel-preset-env@1.6.0 \
+  apidoc@0.17.6
 
 # Bundle app source
 COPY apidoc.json .babelrc README.md ./
-# TODO: Do we need to worry about this copying production configs in?
 COPY ./config ./config
 COPY ./src ./src
 
 EXPOSE 3001
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "run", "startProduction" ]
