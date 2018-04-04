@@ -19,7 +19,12 @@ router.use((req, res, next) => {
  *
  * @apiPermission Endor only (Authorization: "Bearer <token>")
  *
- * @apiParam {String} tokenOrProjectId The id of the project to create the token for
+ * @apiParam {String} projectId The id of the project to create the token for
+ *
+ * @apiParamExample {json} Request Example:
+ * {
+ *  "projectId": "8b004799-23ff-4f23-9567-c64112caf9e9"
+ * }
  *
  * @apiSuccess {Object} token an object with the token information such as id, token, projectId,
  * and created/updated dates
@@ -53,6 +58,11 @@ router.post(
  * @apiParam {String} tokenOrProjectId the project id or token id (note API token, but they token id
  * itself) to to get
  *
+ * @apiParamExample {json} Request Example:
+ * {
+ *  "tokenOrProjectId": "8b004799-23ff-4f23-9567-c64112caf9e9"
+ * }
+ *
  * @apiSuccess {Object} token an object with the token information such as id, token, projectId,
  * and created/updated dates
  *
@@ -83,6 +93,12 @@ router.get(
  *
  * @apiParam {String} tokenOrProjectId the project id or token id (note API token, but they
  * token id itself) to to delete
+ *
+ * @apiParamExample {json} Request Example:
+ * {
+ *  "tokenOrProjectId": "57045c56-1bd4-435b-9a9a-e03a906fa723"
+ * }
+ *
  */
 router.delete(
   '/tokens/:tokenOrProjectId',
