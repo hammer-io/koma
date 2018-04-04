@@ -2,6 +2,7 @@ export default class FirebaseService {
   constructor(newFirebase, logger) {
     this.firebase = newFirebase;
     this.log = logger;
+    this.projectsRef = this.firebase.database().ref('/projects');
   }
 
   /**
@@ -13,8 +14,8 @@ export default class FirebaseService {
     this.log.verbose(`FirebaseService.postHeartbeatToFirebase(): Posting heartbeat for project with id: ${projectId}`);
     const currentTime = Date.now();
 
-    const heartbeats = this.firebase.database().ref('/heartbeats');
-    const applicationHeartbeatsRef = heartbeats.child(projectId);
+    const project = this.projectsRef.child(projectId);
+    const applicationHeartbeatsRef = project.child('heartbeats');
     applicationHeartbeatsRef.push({
       timestamp: currentTime,
       interval: data.interval
@@ -29,8 +30,9 @@ export default class FirebaseService {
    */
   async postOSDataToFirebase(projectId, data) {
     this.log.verbose(`FirebaseService.postOSDataToFirebase(): Posting os data for project with id: ${projectId}`);
-    const osdata = this.firebase.database().ref('/osdata');
-    const osdataRef = osdata.child(projectId);
+
+    const project = this.projectsRef.child(projectId);
+    const osdataRef = project.child('osdata');
     osdataRef.push({
       memoryUsed: data.memoryUsed,
       totalMemory: data.totalMemory,
@@ -48,8 +50,8 @@ export default class FirebaseService {
   async postHTTPDataToFirebase(projectId, data) {
     this.log.verbose(`FirebaseService.postOSDataToFirebase(): Posting http data for project with id: ${projectId}`);
 
-    const httpdata = this.firebase.database().ref('/httpdata');
-    const httpdataRef = httpdata.child(projectId);
+    const project = this.projectsRef.child(projectId);
+    const httpdataRef = project.child('httpdata');
     httpdataRef.push({
       status: data.status,
       url: data.url,

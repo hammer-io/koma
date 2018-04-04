@@ -13,19 +13,19 @@
       "client_x509_cert_url": ""
     },
 
-    "databaseURL": ""
+    "databaseURL": "https://hammer-io-default-example.firebaseio.com"
   },
   "auth": {
     "secret": ""
   },
 
   "tokenDatabase": {
-    "database": "",
-    "username": "",
-    "password": "",
+    "database": "hammer_koma",
+    "username": "root",
+    "password": "root",
     "options": {
-      "host": "",
-      "dialect": "",
+      "host": "127.0.0.1",
+      "dialect": "mysql",
       "pool": {
         "max": 5,
         "min": 0,
