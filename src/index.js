@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import helmet from 'helmet';
 import passport from 'passport';
-import skadi from 'skadi';
+import skadi from 'skadi-hammerio';
 
 import * as tokens from './routes/tokens.routes';
 import * as heartbeats from './routes/heatbeat.routes';
