@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import helmet from 'helmet';
 import passport from 'passport';
+import skadi from 'skadi';
 
 import * as tokens from './routes/tokens.routes';
 import * as heartbeats from './routes/heatbeat.routes';
@@ -25,6 +26,10 @@ firebase.init();
 
 // database setup
 sequelize.initSequelize();
+
+// Run Skadi for data monitoring
+skadi.heartbeat();
+skadi.osdata();
 
 // dependency injections
 const firebaseService = new FirebaseService(firebase.instance, getActiveLogger());
