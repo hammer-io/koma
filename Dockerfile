@@ -29,7 +29,7 @@ RUN npm install --only=production && npm install \
   apidoc@0.17.6
 
 # Bundle app source
-COPY apidoc.json .babelrc README.md ./
+COPY apidoc.json .babelrc .skadiconfig.json README.md ./
 COPY ./config ./config
 COPY ./src ./src
 

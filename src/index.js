@@ -20,7 +20,6 @@ import TokenService from './services/token.service';
 import HTTPDataService from './services/httpdata.service';
 import { getActiveLogger } from './utils/winston';
 
-
 // setup firebase
 firebase.init();
 
